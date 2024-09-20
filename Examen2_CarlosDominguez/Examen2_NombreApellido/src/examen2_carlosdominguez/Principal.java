@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        jButton2.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,6 +70,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton2.setText("Iniciar carrera");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,11 +217,25 @@ public class Principal extends javax.swing.JFrame {
         }
         for (int i = 0; i < pedazos_txt.size(); i++) {
             String [] inicial = pedazos_txt.get(i).split(",");
-            String [] secundario = inicial[3].replace("[","").replace("]","").split(",");
-            String [] tercero = secundario[1].replace("-{", "").replace("}", "").split(">");
+            String [] secundario = inicial[3].replace("[","").replace("]","").split("-");
+            String [] tercero = secundario[1].replace("{", "").replace("}", "").split(">");
             tortugas.add(new Tortuga(inicial[0],Integer.parseInt(inicial[1]),Integer.parseInt(inicial[2]),Integer.parseInt(secundario[0]),Integer.parseInt(tercero[0]),Integer.parseInt(tercero[1])));
         }
+        System.out.println("Se cargo el archivo");
+        jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //carrera
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

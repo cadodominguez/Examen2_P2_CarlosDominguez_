@@ -65,5 +65,10 @@ public class Tortuga {
     public void setAñoI(int añoI) {
         this.añoI = añoI;
     }
+
+    @Override
+    public String toString() {
+        return "Tortuga{" + "Nombre=" + Nombre + ", miliS=" + miliS + ", edad=" + edad + ", wins=" + wins + ", a\u00f1oI=" + añoI + ", a\u00f1oR=" + añoR + '}';
+    }
     
 }

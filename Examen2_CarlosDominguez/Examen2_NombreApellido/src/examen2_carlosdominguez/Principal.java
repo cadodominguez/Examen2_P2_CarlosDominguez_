@@ -15,6 +15,8 @@ import javax.swing.SwingUtilities;
 public class Principal extends javax.swing.JFrame {
     static boolean encendido = false;
     static  ArrayList <Tortuga> tortugas = new ArrayList();
+    static int ganador = -1;
+    
     /**
      * Creates new form Principal
      */
@@ -239,6 +241,7 @@ public class Principal extends javax.swing.JFrame {
                     int progresoLocal = progreso;
                     progreso++;
                     SwingUtilities.invokeLater(() -> actualizar1(progresoLocal));
+                    ganador(progreso,0);
             }
          });
          hilo.start();
@@ -253,6 +256,7 @@ public class Principal extends javax.swing.JFrame {
                     int progresoLocal = progreso;
                     progreso++;
                     SwingUtilities.invokeLater(() -> actualizar2(progresoLocal));
+                    ganador(progreso,1);
             }
          });
          hilo2.start();
@@ -267,6 +271,7 @@ public class Principal extends javax.swing.JFrame {
                     int progresoLocal = progreso;
                     progreso++;
                     SwingUtilities.invokeLater(() -> actualizar3(progresoLocal));
+                    ganador(progreso,2);
             }
          });
          hilo3.start();
@@ -280,7 +285,8 @@ public class Principal extends javax.swing.JFrame {
                     }
                     int progresoLocal = progreso;
                     progreso++;
-                    SwingUtilities.invokeLater(() -> actualizar3(progresoLocal));
+                    SwingUtilities.invokeLater(() -> actualizar4(progresoLocal));
+                    ganador(progreso,3);
             }
          });
          hilo4.start();
@@ -297,10 +303,20 @@ public class Principal extends javax.swing.JFrame {
         jpb_tortuga2.setValue(t1);
     }
     public void actualizar3(int t1){
-        jpb_tortuga2.setValue(t1);
+        jpb_tortuga3.setValue(t1);
     }
     public void actualizar4(int t1){
-        jpb_tortuga2.setValue(t1);
+        jpb_tortuga4.setValue(t1);
+    }
+    public void ganador(int progress,int p){
+        if (progress >= 100) {
+            encendido = true;
+            ganador = p;
+            labelG(ganador);
+        }
+    }
+    public void labelG (int pos){
+        
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

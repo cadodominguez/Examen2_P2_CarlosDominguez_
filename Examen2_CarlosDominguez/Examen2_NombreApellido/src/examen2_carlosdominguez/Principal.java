@@ -6,13 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author claudiacortes
  */
 public class Principal extends javax.swing.JFrame {
-
+    static boolean encendido = false;
+    static  ArrayList <Tortuga> tortugas = new ArrayList();
     /**
      * Creates new form Principal
      */
@@ -204,7 +206,6 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //cargar archivo
         ArrayList<String> pedazos_txt = new ArrayList();
-        ArrayList <Tortuga> tortugas = new ArrayList();
         File Info_tortugas = new File("tortugas.txt");
 
         try (BufferedReader br = new BufferedReader(new FileReader(Info_tortugas))) {
@@ -227,19 +228,80 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //carrera
-        
-        
-        
-        
-        
-        
-        
-        
+         Thread hilo = new Thread(() ->{
+            int progreso=0;
+            while (progreso <= 100 && !encendido) {
+                    try {
+                        Thread.sleep(tortugas.get(0).getMiliS());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    int progresoLocal = progreso;
+                    progreso++;
+                    SwingUtilities.invokeLater(() -> actualizar1(progresoLocal));
+            }
+         });
+         hilo.start();
+         Thread hilo2 = new Thread(() ->{
+            int progreso=0;
+            while (progreso <= 100 && !encendido) {
+                    try {
+                        Thread.sleep(tortugas.get(1).getMiliS());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    int progresoLocal = progreso;
+                    progreso++;
+                    SwingUtilities.invokeLater(() -> actualizar2(progresoLocal));
+            }
+         });
+         hilo2.start();
+         Thread hilo3 = new Thread(() ->{
+            int progreso=0;
+            while (progreso <= 100 && !encendido) {
+                    try {
+                        Thread.sleep(tortugas.get(2).getMiliS());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    int progresoLocal = progreso;
+                    progreso++;
+                    SwingUtilities.invokeLater(() -> actualizar3(progresoLocal));
+            }
+         });
+         hilo3.start();
+         Thread hilo4= new Thread(() ->{
+            int progreso=0;
+            while (progreso <= 100 && !encendido) {
+                    try {
+                        Thread.sleep(tortugas.get(3).getMiliS());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    int progresoLocal = progreso;
+                    progreso++;
+                    SwingUtilities.invokeLater(() -> actualizar3(progresoLocal));
+            }
+         });
+         hilo4.start();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     /**
+     * @param t1
      * @param args the command line arguments
      */
+    public void actualizar1(int t1){
+        jpb_tortuga1.setValue(t1);
+    }
+    public void actualizar2(int t1){
+        jpb_tortuga2.setValue(t1);
+    }
+    public void actualizar3(int t1){
+        jpb_tortuga2.setValue(t1);
+    }
+    public void actualizar4(int t1){
+        jpb_tortuga2.setValue(t1);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

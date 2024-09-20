@@ -15,7 +15,9 @@ import javax.swing.SwingUtilities;
 public class Principal extends javax.swing.JFrame {
     static boolean encendido = false;
     static  ArrayList <Tortuga> tortugas = new ArrayList();
+    static ArrayList <String> registro_W = new ArrayList();
     static int ganador = -1;
+    static int NumCarrera=0;
     
     /**
      * Creates new form Principal
@@ -48,6 +50,17 @@ public class Principal extends javax.swing.JFrame {
         btn_guardarResultados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+        jTabbedPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTabbedPane1ComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Tortuga 1");
 
@@ -291,6 +304,15 @@ public class Principal extends javax.swing.JFrame {
          });
          hilo4.start();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        //actualiza la tabla cada vez que se mueve algo
+        
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTabbedPane1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentShown
+        
+    }//GEN-LAST:event_jTabbedPane1ComponentShown
     
     /**
      * @param t1
@@ -310,13 +332,18 @@ public class Principal extends javax.swing.JFrame {
     }
     public void ganador(int progress,int p){
         if (progress >= 100) {
+            NumCarrera +=1;
             encendido = true;
             ganador = p;
             labelG(ganador);
+            Tortuga ganadora = tortugas.get(p);
+            ganadora.setWins(ganadora.getWins()+1);
+            tortugas.set(p, ganadora);
+            registro_W.add(NumCarrera+","+ganadora.getNombre());
         }
     }
     public void labelG (int pos){
-        
+        lbl_ganador.setText(" "+tortugas.get(pos).getNombre());
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

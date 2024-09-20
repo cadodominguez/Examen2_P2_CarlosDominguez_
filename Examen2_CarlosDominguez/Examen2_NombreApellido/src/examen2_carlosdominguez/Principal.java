@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -307,7 +309,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         //actualiza la tabla cada vez que se mueve algo
-        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < registro_W.size(); i++) {
+            String [] pieza = registro_W.get(i).split(",");
+            Object[] fila = {pieza[0], pieza[1]};
+            model.addRow(fila);
+        }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jTabbedPane1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentShown

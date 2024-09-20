@@ -2,10 +2,15 @@
 package examen2_carlosdominguez;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -170,6 +175,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btn_guardarResultados.setText("Salvar Resultados");
+        btn_guardarResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarResultadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -321,6 +331,21 @@ public class Principal extends javax.swing.JFrame {
     private void jTabbedPane1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentShown
         
     }//GEN-LAST:event_jTabbedPane1ComponentShown
+
+    private void btn_guardarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarResultadosActionPerformed
+        String nombre = "";
+        for (int i = 0; i < registro_W.size(); i++) {
+            nombre+=registro_W +"\n";
+        }
+            BufferedWriter br;
+            try {
+                br = new BufferedWriter(new FileWriter("Datos_Temp_Wins"+".txt",false));
+                br.write(nombre);
+                br.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_btn_guardarResultadosActionPerformed
     
     /**
      * @param t1
@@ -343,15 +368,16 @@ public class Principal extends javax.swing.JFrame {
             NumCarrera +=1;
             encendido = true;
             ganador = p;
-            labelG(ganador);
             Tortuga ganadora = tortugas.get(p);
             ganadora.setWins(ganadora.getWins()+1);
             tortugas.set(p, ganadora);
             registro_W.add(NumCarrera+","+ganadora.getNombre());
+            labelG(ganador);
         }
     }
     public void labelG (int pos){
         lbl_ganador.setText(" "+tortugas.get(pos).getNombre());
+        JOptionPane.showMessageDialog(rootPane,tortugas.get(pos).toString(), "Info del ganador", 1);
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
